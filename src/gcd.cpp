@@ -1,33 +1,29 @@
 #include "gcd.h"
+#include <iostream>
+#include <algorithm>
 
-GCD::GCD(){ }
-
-
-int GCD::gcd(int a, int b){
-
-    if(a < 0) a = -a;
-    if(b < 0) b = -b;
-
-
-    if(a == 0) return b;
-    if(b == 0) return a;
-
-    return gcd_iter(a, b);
-}
-
-
-void GCD::swap(int &a, int &b){
-    int temp = a;
-    a = b;
-    b = temp;
-}
-
-int GCD::gcd_iter(int a, int b){
-    while(a > 0) {
-        if(a < b) {
-            swap(a, b);
-        }
-        a = a % b;
+//Euclidean extended algorithm where gcd(a,b) = gcd(b,r), where r is remainder
+// 0 <= r < b
+int GCD::gcd(int a, int b)
+{
+    if (b > a)
+    {
+        reverse(&a, &b);
     }
-    return b;
+    if (a == b)
+        return a;
+
+    if (b == 0)
+    {
+        return a;
+    }
+    return gcd(b, a % b);
+}
+
+//Reverse the values if a is greater than b
+void GCD::reverse(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }

@@ -15,18 +15,16 @@ class RSA
         ~RSA();
         void asciiToString(std::string str);
         void stringToAscii(std::string str);
-        int messageEncrypt(int msg, int e);
+        int messageEncrypt(int msg);
         int messageDecrypt(int msg);
-        int checkCoPrime(int num1, int num2);
-
+        
 
         int findPrime(int n);
-
-
-        int getPublicKey() const;
+        int getPublicKey();
 
 
     private:
+        int findE(int N, int phi);
         int findD(int e, int phi);
         int calculator(int base, int expo, int modular);
 
